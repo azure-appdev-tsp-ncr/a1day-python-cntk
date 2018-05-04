@@ -25,7 +25,10 @@ def main():
   hidden_dim = 20
   output_dim = 2
 
-  train_file = ".\\Data\\cleveland_cntk_twonode.txt"
+  # Linux Version
+  train_file = ".//Data//cleveland_cntk_twonode.txt"
+  # Windows Version
+  # train_file = ".\\Data\\cleveland_cntk_twonode.txt"
   
   # 1. create network
   X = C.ops.input_variable(input_dim, np.float32)
