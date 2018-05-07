@@ -8,15 +8,13 @@
 #
 #  $1 - Resource Group Name
 #  $2 - Resource Group location (e.g eastus)
-#  $3 - SFTP Server DNS Label Prefix (Try to make unique, 8 char or less)
-#  $4 - SFTP User Name
-#  $5 - SFTP User Base Directory (will be created)
+#  $3 - ACI Container Prefix (Try to make unique, 8 char or less)
 #
 #  Trying to ensure Linux compatability
 #   
 #  Create Storage Account & Fileshare  
 ACI_PERS_RESOURCE_GROUP=$1
-ACI_PERS_CONTAINER_GROUP_NAME=${3}${RANDOM}sftp
+ACI_PERS_CONTAINER_GROUP_NAME=${3}${RANDOM}pycntk
 ACI_PERS_LOCATION=$2
 #ACI_PERS_SHARE_NAME=tbd
 echo
