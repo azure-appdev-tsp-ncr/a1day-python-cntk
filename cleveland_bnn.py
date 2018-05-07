@@ -28,7 +28,7 @@ def main():
 
   # Linux Version
   app_root = os.environ['APP_ROOT']
-  train_file = app_root + "/Data//cleveland_cntk_twonode.txt"
+  train_file = app_root + "/Data/cleveland_cntk_twonode.txt"
   # Windows Version
   # train_file = ".\\Data\\cleveland_cntk_twonode.txt"
   

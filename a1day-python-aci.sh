@@ -9,6 +9,7 @@
 #  $1 - Resource Group Name
 #  $2 - Resource Group location (e.g eastus)
 #  $3 - ACI Container Prefix (Try to make unique, 8 char or less)
+#  $4 - Storage Account Name
 #
 #  Trying to ensure Linux compatability
 #   
@@ -16,22 +17,23 @@
 ACI_PERS_RESOURCE_GROUP=$1
 ACI_PERS_CONTAINER_GROUP_NAME=${3}${RANDOM}pycntk
 ACI_PERS_LOCATION=$2
-#ACI_PERS_SHARE_NAME=tbd
+ACI_PERS_STORAGE_ACCOUNT_NAME=${4}
+ACI_PERS_SHARE_NAME=pycntk
 echo
 echo '***' A1Day Python CNTK Container Group
 echo $ACI_PERS_CONTAINER_GROUP_NAME
 
 # Export the connection string as an environment variable. The following 'az storage share create' command
 # references this environment variable when creating the Azure file share.
-# export AZURE_STORAGE_CONNECTION_STRING=`az storage account show-connection-string --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_PERS_STORAGE_ACCOUNT_NAME --output tsv`
+export AZURE_STORAGE_CONNECTION_STRING=`az storage account show-connection-string --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_PERS_STORAGE_ACCOUNT_NAME --output tsv`
 
 # Get and display Storage Account
-#STORAGE_ACCOUNT=$(az storage account list --resource-group $ACI_PERS_RESOURCE_GROUP --query "[?contains(name,'$ACI_PERS_STORAGE_ACCOUNT_NAME')].[name]" --output tsv)
-#echo '****************'
-#echo Storage Acct: $STORAGE_ACCOUNT
+STORAGE_ACCOUNT=$(az storage account list --resource-group $ACI_PERS_RESOURCE_GROUP --query "[?contains(name,'$ACI_PERS_STORAGE_ACCOUNT_NAME')].[name]" --output tsv)
+echo '****************'
+echo Storage Acct: $STORAGE_ACCOUNT
 # Get and display Storage Key
-#STORAGE_KEY=$(az storage account keys list --resource-group $ACI_PERS_RESOURCE_GROUP --account-name $STORAGE_ACCOUNT --query "[0].value" --output tsv)
-#echo Storage Key:  $STORAGE_KEY
+STORAGE_KEY=$(az storage account keys list --resource-group $ACI_PERS_RESOURCE_GROUP --account-name $STORAGE_ACCOUNT --query "[0].value" --output tsv)
+echo Storage Key:  $STORAGE_KEY
 
 # Create A1Day CNTK Server Container Instance
 az container create \
@@ -39,12 +41,10 @@ az container create \
     --name $ACI_PERS_CONTAINER_GROUP_NAME \
     --image ghoelzer2azure/a1day-python-cntk:latest \
      --restart-policy Never
-# Additional Parms to Mount Fileshare
-#    --environment-variables SFTP_USERS=$4:$SFTP_PWD \
-#    --azure-file-volume-account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
-#    --azure-file-volume-account-key $STORAGE_KEY \
-#    --azure-file-volume-share-name $ACI_PERS_SHARE_NAME \
-#    --azure-file-volume-mount-path /home/$4/$5
+    --azure-file-volume-account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
+    --azure-file-volume-account-key $STORAGE_KEY \
+    --azure-file-volume-share-name $ACI_PERS_SHARE_NAME \
+    --azure-file-volume-mount-path /env
 
 # Display created Container
 echo '****************'
