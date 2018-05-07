@@ -37,7 +37,8 @@ echo $ACI_PERS_CONTAINER_GROUP_NAME
 az container create \
     --resource-group $ACI_PERS_RESOURCE_GROUP \
     --name $ACI_PERS_CONTAINER_GROUP_NAME \
-    --image ghoelzer2azure/a1day-python-cntk:latest
+    --image ghoelzer2azure/a1day-python-cntk:latest \
+     --restart-policy Never
 # Additional Parms to Mount Fileshare
 #    --environment-variables SFTP_USERS=$4:$SFTP_PWD \
 #    --azure-file-volume-account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
