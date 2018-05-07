@@ -3,6 +3,7 @@
 
 import numpy as np
 import cntk as C
+import os
 
 def create_reader(path, input_dim, output_dim, rnd_order, sweeps):
   x_strm = C.io.StreamDef(field='symptoms', shape=input_dim,
@@ -26,7 +27,8 @@ def main():
   output_dim = 2
 
   # Linux Version
-  train_file = ".//Data//cleveland_cntk_twonode.txt"
+  app_root = os.environ['APP_ROOT']
+  train_file = app_root + ".//Data//cleveland_cntk_twonode.txt"
   # Windows Version
   # train_file = ".\\Data\\cleveland_cntk_twonode.txt"
   
