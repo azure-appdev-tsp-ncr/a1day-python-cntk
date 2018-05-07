@@ -43,19 +43,19 @@ echo Storage Key:  $STORAGE_KEY
 # Create Fileshare
 az storage share create \
     --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
-    --account-key $STORAGEKEY \
+    --account-key $STORAGE_KEY \
     --name $ACI_PERS_SHARE_NAME
 
 # Create Data Directory & Upload Data
 az storage directory create \
    --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
-   --account-key $STORAGEKEY \
+   --account-key $STORAGE_KEY \
    --share-name $ACI_PERS_SHARE_NAME \
    --name "Data"
 
 az storage file upload \
     --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
-    --account-key $STORAGEKEY \
+    --account-key $STORAGE_KEY \
     --share-name $ACI_PERS_SHARE_NAME \
     --source "./Data/cleveland_cntk_twonode.txt" \
     --path "Data/cleveland_cntk_twonode.txt"
@@ -63,9 +63,9 @@ az storage file upload \
 # Create Model Output Directory
 az storage directory create \
    --account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
-   --account-key $STORAGEKEY \
+   --account-key $STORAGE_KEY \
    --share-name $ACI_PERS_SHARE_NAME \
    --name "Model"
 
 echo '****************'
-Storage Initialization complete for $ACI_PERS_STORAGE_ACCOUNT_NAME/$ACI_PERS_SHARE_NAME
+echo Storage Initialization complete for $ACI_PERS_STORAGE_ACCOUNT_NAME/$ACI_PERS_SHARE_NAME
