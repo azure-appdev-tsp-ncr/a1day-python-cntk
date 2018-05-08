@@ -15,7 +15,7 @@ apt-get install openmpi-bin
 pip install cntk
 python -c "import cntk; print(cntk.__version__)"
 ```
-git clone this repo, then run python script "cleveland_bnn.py" from base of git project, should get the following output
+git clone this repo, then run bash script "cleveland_bnn.sh" from base of git project, should get the following output
 ```
 Begin binary classification (two-node technique)
 
