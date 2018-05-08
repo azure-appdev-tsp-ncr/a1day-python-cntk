@@ -1,16 +1,11 @@
-# bash script to execute az commands to create a simple Cloud SFTP Server/Azure Fileshare deployment
+# bash script to execute az commands to create a Storage Account, Azure Fileshare, and initialize Data Directories
 #
-# Assumes az login already performed from Azure bash shell, and an existing resource group has been created
-# Azure ACI will be used to create single container/SFTP Server (must use supporting location)
-# and create and mount Azure Storage Account/Fileshare to container data volume
+# Assumes az login already performed from Azure bash shell, an existing resource group has been created, and this
+# script is executed from the root of this cloned Git repo.
 # 
-# Use provided script <tbd.sh> to create resource group/fileshare pair
-#
 #  $1 - Resource Group Name
 #  $2 - Resource Group location (e.g eastus)
 #  $3 - Storage Account Prefix (Try to make unique, 8 char or less)
-#
-#  Trying to ensure Linux compatability
 #   
 #  Create Storage Account & Fileshare  
 ACI_PERS_RESOURCE_GROUP=$1
@@ -28,8 +23,8 @@ az storage account create \
     --location $ACI_PERS_LOCATION \
 --sku Standard_LRS
 
-# Export the connection string as an environment variable. The following 'az storage share create' command
-# references this environment variable when creating the Azure file share.
+# Export the connection string as an environment variable. The following 'az storage' commands
+# reference this environment variable when creating the Azure file share.
 export AZURE_STORAGE_CONNECTION_STRING=`az storage account show-connection-string --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_PERS_STORAGE_ACCOUNT_NAME --output tsv`
 
 # Get and display Storage Account

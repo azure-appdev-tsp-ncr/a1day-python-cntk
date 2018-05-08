@@ -1,8 +1,11 @@
-# bash script to execute az commands to create a simple Cloud SFTP Server/Azure Fileshare deployment
+# bash script to execute az commands to launch a Python/CNTK Image using ACI, attaching an Azure Fileshare for
+# data input and output. 
 #
 # Assumes az login already performed from Azure bash shell, and an existing resource group has been created
-# Azure ACI will be used to create single container/SFTP Server (must use supporting location)
-# and create and mount Azure Storage Account/Fileshare to container data volume
+# Azure ACI will be used to create single container batch instance of Python/CNTK Image (must use supporting location)
+# and mount an existing Azure Storage Account/Fileshare to container data volume.
+#
+# *** Use provided helper script 'a1day-init-fileshare.sh' to create Storage Account, Fileshare, and initialize data directories
 # 
 # Use provided script <tbd.sh> to create resource group/fileshare pair
 #
@@ -10,10 +13,8 @@
 #  $2 - Resource Group location (e.g eastus)
 #  $3 - ACI Container Prefix (Try to make unique, 8 char or less)
 #  $4 - Storage Account Name
-#
-#  Trying to ensure Linux compatability
 #   
-#  Create Storage Account & Fileshare  
+#  Define Container Group, Storage Account & Fileshare  
 ACI_PERS_RESOURCE_GROUP=$1
 ACI_PERS_CONTAINER_GROUP_NAME=${3}${RANDOM}pycntk
 ACI_PERS_LOCATION=$2
@@ -23,8 +24,8 @@ echo
 echo '***' A1Day Python CNTK Container Group
 echo $ACI_PERS_CONTAINER_GROUP_NAME
 
-# Export the connection string as an environment variable. The following 'az storage share create' command
-# references this environment variable when creating the Azure file share.
+# Export the connection string as an environment variable. The following 'az storage' commands
+# reference this environment variable.
 export AZURE_STORAGE_CONNECTION_STRING=`az storage account show-connection-string --resource-group $ACI_PERS_RESOURCE_GROUP --name $ACI_PERS_STORAGE_ACCOUNT_NAME --output tsv`
 
 # Get and display Storage Account
@@ -35,7 +36,7 @@ echo Storage Acct: $STORAGE_ACCOUNT
 STORAGE_KEY=$(az storage account keys list --resource-group $ACI_PERS_RESOURCE_GROUP --account-name $STORAGE_ACCOUNT --query "[0].value" --output tsv)
 echo Storage Key:  $STORAGE_KEY
 
-# Create A1Day CNTK Server Container Instance
+# Create A1Day Python/CNTK Server Container Instance
 az container create \
     --resource-group $ACI_PERS_RESOURCE_GROUP \
     --name $ACI_PERS_CONTAINER_GROUP_NAME \

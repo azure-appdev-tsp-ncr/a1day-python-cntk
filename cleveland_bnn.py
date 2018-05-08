@@ -32,7 +32,7 @@ def main():
   train_file = app_root + "/Data/cleveland_cntk_twonode.txt"
   model_file = app_root + "/Model/cleveland_bnn_" + model_run + ".model"
   # Windows Version
-  # train_file = ".\\Data\\cleveland_cntk_twonode.txt"
+  # TBD
   
   # 1. create network
   X = C.ops.input_variable(input_dim, np.float32)
