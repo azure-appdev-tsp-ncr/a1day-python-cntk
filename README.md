@@ -1,15 +1,21 @@
 # a1day-python-cntk
-Neural Binary Classification Example using CNTK Python Libraries
+Neural Binary Classification Example using CNTK Python Libraries, see MSDN 2018 March Article for full description of use case - https://msdn.microsoft.com/en-us/magazine/mt845655 
 
-Current testing/prototyping used to successfully run training of Model:
-- Used Docker Image:  docker pull lepinkainen/ubuntu-python-base
-- From CNTK Linux Install
+To create a Docker Image of example, unit test locally, then run in Azure follow instructions [here]
+
+To run in a local python installation or from within a Docker Image:
+- From CNTK Linux Install (CNTK only supported on Ubuntu 16.X)
+
+If running example from base Docker Image:
+```
+docker run -it lepinkainen/ubuntu-python-base:latest bash
+```
 ```
 apt-get install openmpi-bin
 pip install cntk
 python -c "import cntk; print(cntk.__version__)"
 ```
-git clone this repo into image, then run python script "cleveland_bnn.py" from base of git project, should get the following output
+git clone this repo, then run python script "cleveland_bnn.py" from base of git project, should get the following output
 ```
 Begin binary classification (two-node technique)
 
