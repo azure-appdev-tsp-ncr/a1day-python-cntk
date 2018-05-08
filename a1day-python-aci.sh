@@ -40,7 +40,8 @@ az container create \
     --resource-group $ACI_PERS_RESOURCE_GROUP \
     --name $ACI_PERS_CONTAINER_GROUP_NAME \
     --image ghoelzer2azure/a1day-python-cntk:latest \
-     --restart-policy Never \
+    --restart-policy Never \
+    --environment-variables MODEL_RUN=$ACI_PERS_CONTAINER_GROUP_NAME \
     --azure-file-volume-account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
     --azure-file-volume-account-key $STORAGE_KEY \
     --azure-file-volume-share-name $ACI_PERS_SHARE_NAME \
