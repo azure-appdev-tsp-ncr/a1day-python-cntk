@@ -29,6 +29,7 @@ def main():
   # Linux Version
   app_root = os.environ['APP_ROOT']
   train_file = app_root + "/Data/cleveland_cntk_twonode.txt"
+  model_file = app_root + "Model/cleveland_bnn.model"
   # Windows Version
   # train_file = ".\\Data\\cleveland_cntk_twonode.txt"
   
@@ -93,7 +94,9 @@ def main():
   print("Classification accuracy on the %d data items = %0.2f%%" \
     % (num_test,acc))
 
-  # (could save model here)
+  # Save Model
+  model.save(model_file)
+  print("\nSaved Cleveland Heart Disease Model to: " + model_file)
 
   # (use trained model to make prediction)
 
