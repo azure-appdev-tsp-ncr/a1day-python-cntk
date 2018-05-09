@@ -1,25 +1,25 @@
-#Instructions for running python CNTK example in Azure using Docker/ACI
+## Create python CNTK using Local Docker/VS Code IDE
 
-Step 1 - Create developer VM using base Windows Server 2016 Datacenter image from the Azure Marketplace.
-* Use a D4s_v3 Type/Size which supports nested virtualization needed for Docker
-* Make sure to enable the RDP(3389) inbound port
-* Use the remaining defaults and create the VM
+### Create developer VM using base Windows Server 2016 Datacenter image from the Azure Marketplace.
+1. Use a D4s_v3 Type/Size which supports nested virtualization needed for Docker
+2. Make sure to enable the RDP(3389) inbound port
+3. Use the remaining defaults and create the VM
 
-Step 2 - Connect to VM and add required development tooling
-* From the Windows Command Prompt, install the Chocolatey Package Manager by running the following command:
+### Connect to VM and add required development tooling
+1. From the Windows Command Prompt, install the Chocolatey Package Manager by running the following command:
 ```
  @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin" 
  ```
- * From Powershell (all examples will use Powershell going forward), execute the following command to install the additional developer tooling and utilities
+ 2. From Powershell (all examples will use Powershell going forward), execute the following command to install the additional developer tooling and utilities
  ```
  cinst git visualstudiocode azure-cli docker docker-for-windows kubernetes-cli -y
  ```
- * When the package installation is complete, close Powershell session and use Desktop Icon to start Docker initialization.  You will be prompted to initially logout, just restart the VM.  Two restarts will be required to fully initialize the Hyper-V subsystem for Docker to operate.  Follow the prompts from Docker.  
- * After the 2nd VM restart and successful Docker startup, open a Powershell session and execute the following command to verify Docker install
+ 3. When the package installation is complete, close Powershell session and use Desktop Icon to start Docker initialization.  You will be prompted to initially logout, just restart the VM.  Two restarts will be required to fully initialize the Hyper-V subsystem for Docker to operate.  Follow the prompts from Docker.  
+ 4. After the 2nd VM restart and successful Docker startup, open a Powershell session and execute the following command to verify Docker install
  ```
  docker run -it centos bash
  ```
- * You should see something like the following (exit the container as shown)
+ 5. You should see something like the following (exit the container as shown)
  ```
 Unable to find image 'centos:latest' locally
 latest: Pulling from library/centos
@@ -29,19 +29,18 @@ Status: Downloaded newer image for centos:latest
 [root@e2584d2044c8 /]# exit
 exit
 ```
-
- Step 3 - Clone this source repo and open in VS Code
- * Execute git clone into your home directory, change directories to project base and lauch VisualCode
+ ### Clone this source repo and open in VS Code
+ 1. Execute git clone into your home directory, change directories to project base and lauch VisualCode
  ```
  git clone https://github.com/azure-appdev-tsp-ncr/a1day-python-cntk.git
  cd a1day-python-cntk
  code .\
  ```
- * The VisualCode IDE should now be open to your project folder, and you should see all the project files and directories on the left Explorer navigation pane.
- * Next, select the Dockerfile in the project.  Install the Docker extension when prompted, which enables Docker commands to be run from the IDE.  Some additional recommendations will be displayed, you can ignore or also install the Azure CLI Tools for later experimentation.
- * Select the Explorer icon on left navigation pane, and select and review the Dockerfile in the project.  You will notice that a non-Root user (1001) is being configured to run processes within the Docker container, this is a best practice to prevent any accidental or purposeful exscalation of container privileges.
- * Right-click the Dockerfile, and select the "Build Image" from the items at the bottom of the displayed list (may have to restart VS Code if this doesn't initially display).  Press enter to accept the default image name (displayed in command pallette at top of IDE).
- * Once Docker image successfully builds, use instructions in comments to perform local unit test of the image from Terminal window in VS Code.  You should see something similar to the following
+ 2. The VisualCode IDE should now be open to your project folder, and you should see all the project files and directories on the left Explorer navigation pane.
+ 3. Next, select the Dockerfile in the project.  Install the Docker extension when prompted, which enables Docker commands to be run from the IDE.  Some additional recommendations will be displayed, you can ignore or also install the Azure CLI Tools for later experimentation.
+ 4. Select the Explorer icon on left navigation pane, and select and review the Dockerfile in the project.  You will notice that a non-Root user (1001) is being configured to run processes within the Docker container, this is a best practice to prevent any accidental or purposeful exscalation of container privileges.
+ 5. Right-click the Dockerfile, and select the "Build Image" from the items at the bottom of the displayed list (may have to restart VS Code if this doesn't initially display).  Press enter to accept the default image name (displayed in command pallette at top of IDE).
+ 6. Once Docker image successfully builds, use instructions in comments to perform local unit test of the image from Terminal window in VS Code.  You should see something similar to the following
  ```
 docker run -it -e 'APP_ROOT=/opt/a1day-python-cntk' a1day-python-cntk:latest
 
