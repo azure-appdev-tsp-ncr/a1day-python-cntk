@@ -119,7 +119,7 @@ az container create \
 #    --registry-username <username> \
 #    --registry-password <password1>
 ```
-3. update the ```--image``` argument with the ACR container repo image created in Lab 2, then remove the comments and adding a line continuation, updating the registry command arguments similar to below
+3. update the ```--image``` argument with the ACR container repo image created in Lab 2, then remove the comments and adding a line continuation, update the registry command arguments similar to below
 ```
 # Create A1Day Python/CNTK Server Container Instance
 az container create \
