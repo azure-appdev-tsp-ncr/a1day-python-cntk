@@ -49,8 +49,8 @@ az container create \
     --azure-file-volume-mount-path /env
 # Add continuation and uncomment/update for use with ACR
 #    --registry-login-server mycontainerregistry.azurecr.io \
-#    --registry-username <service-principal-ID> \
-#    --registry-password <service-principal-password>
+#    --registry-username <username> \
+#    --registry-password <password1>
 
 # Display created Container
 echo '****************'

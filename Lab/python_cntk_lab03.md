@@ -99,3 +99,39 @@ Finished[#############################################################]  100.000
 ``` 
 nano a1day-python-aci.sh
 ```
+2. Scroll down to near end of script until you find the following section
+```
+# Create A1Day Python/CNTK Server Container Instance
+az container create \
+    --resource-group $ACI_PERS_RESOURCE_GROUP \
+    --name $ACI_PERS_CONTAINER_GROUP_NAME \
+    --image ghoelzer2azure/a1day-python-cntk:latest \
+    --restart-policy Never \
+    --environment-variables MODEL_RUN=$ACI_PERS_CONTAINER_GROUP_NAME \
+    --azure-file-volume-account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
+    --azure-file-volume-account-key $STORAGE_KEY \
+    --azure-file-volume-share-name $ACI_PERS_SHARE_NAME \
+    --azure-file-volume-mount-path /env
+# Add continuation and uncomment/update for use with ACR
+#    --registry-login-server mycontainerregistry.azurecr.io \
+#    --registry-username <username> \
+#    --registry-password <password1>
+```
+3. update the ```--image``` argument with the ACR contaner repo image created in Lab 2, then remove the comments adding a line continuation and updating the registry command arguments similar to below
+```
+# Create A1Day Python/CNTK Server Container Instance
+az container create \
+    --resource-group $ACI_PERS_RESOURCE_GROUP \
+    --name $ACI_PERS_CONTAINER_GROUP_NAME \
+    --image a1daycntk01.azurecr.io/azureworkshop/a1day-python-cntk:v1 \
+    --restart-policy Never \
+    --environment-variables MODEL_RUN=$ACI_PERS_CONTAINER_GROUP_NAME \
+    --azure-file-volume-account-name $ACI_PERS_STORAGE_ACCOUNT_NAME \
+    --azure-file-volume-account-key $STORAGE_KEY \
+    --azure-file-volume-share-name $ACI_PERS_SHARE_NAME \
+    --azure-file-volume-mount-path /env \
+    --registry-login-server a1daycntk01.azurecr.io \
+    --registry-username a1daycntk01 \
+    --registry-password mypassword1
+```
+4. Save and exit nano by using ```<cntrl> O``` and ```<cntrl> X```
