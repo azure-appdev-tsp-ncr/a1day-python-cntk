@@ -1,7 +1,7 @@
 # a1day-python-cntk
 Neural Binary Classification Example using CNTK Python Libraries, see MSDN 2018 March Article for full description of use case - https://msdn.microsoft.com/en-us/magazine/mt845655 
 
-To create a Docker Image of example, unit test locally, then run in Azure follow instructions [here](https://github.com/azure-appdev-tsp-ncr/a1day-python-cntk/tree/master/Lab)
+**To create a Docker Image of example, unit test locally, then run in Azure follow instructions** [here](https://github.com/azure-appdev-tsp-ncr/a1day-python-cntk/tree/master/Lab)
 
 To run in a local python installation or from within a Docker Image:
 - From CNTK Linux Install (CNTK only supported on Ubuntu 16.X)
