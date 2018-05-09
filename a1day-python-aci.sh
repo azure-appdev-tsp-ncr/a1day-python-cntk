@@ -7,8 +7,6 @@
 #
 # *** Use provided helper script 'a1day-init-fileshare.sh' to create Storage Account, Fileshare, and initialize data directories
 # 
-# Use provided script <tbd.sh> to create resource group/fileshare pair
-#
 #  $1 - Resource Group Name
 #  $2 - Resource Group location (e.g eastus)
 #  $3 - ACI Container Prefix (Try to make unique, 8 char or less)
