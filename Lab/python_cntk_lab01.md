@@ -1,4 +1,4 @@
-## Create python CNTK using Local Docker/VS Code IDE
+## Create python CNTK development environment using Local Docker/VS Code IDE
 
 ### Create developer VM using base Windows Server 2016 Datacenter image from the Azure Marketplace.
 1. Use a D4s_v3 Type/Size which supports nested virtualization needed for Docker
