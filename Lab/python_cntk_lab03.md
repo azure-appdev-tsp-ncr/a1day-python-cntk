@@ -1,5 +1,7 @@
 ## Launch Batch Container using Azure Container Instances integrated with Azure Fileshare
 
+#### Note:  AZure Container Instances are NOT available in all Azure Regions, make sure to use a Resource Group in a Region where ACI is available.
+
 ### Lauch Azure Cloud Shell, using Bash session and download project files
 1. From the Azure Portal, select the Cloud Shell ">_", or open a new tab and go to shell.azure.com
 2. Make sure to select the proper directory/azure login
@@ -140,7 +142,7 @@ az container create \
 
 5. Execute the Bash ACI Container Launch script, which will create a unique container instance per script execution
 ```
-./a1day-init-fileshare.sh <Resource Group Name> <Location> <Container Group Prefix> <Storage Acct Name>
+./a1day-python-aci.sh <Resource Group Name> <Location> <Container Group Prefix> <Storage Acct Name>
 
 # Example: ./a1day-python-aci.sh a1day-cntk01 eastus a1day a1daytst2pycntk
 ```
