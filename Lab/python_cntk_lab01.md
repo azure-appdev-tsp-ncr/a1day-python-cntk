@@ -1,3 +1,5 @@
+### Good Opportunity to Demo VSCode Live Code Share
+
 ## Create python CNTK development environment using Local Docker/VS Code IDE
 
 ### Create developer VM using base Windows Server 2016 Datacenter image from the Azure Marketplace.
