@@ -31,6 +31,8 @@ Status: Downloaded newer image for centos:latest
 [root@e2584d2044c8 /]# exit
 exit
 ```
+An optional step is to create a generalized managed instance from this VM, then other developers will be to easily create their instance of the VM in Azure as Development VDI.  Follow the instructions here - https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource
+
  ### Clone this source repo and open in VS Code
  1. Execute git clone into your home directory, change directories to project base and lauch VisualCode
  ```
