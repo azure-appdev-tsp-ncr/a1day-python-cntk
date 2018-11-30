@@ -25,12 +25,13 @@ def main():
   input_dim = 18
   hidden_dim = 20
   output_dim = 2
-
+  # ******************* Updates from Original
   # Linux Version
   app_root = os.environ['APP_ROOT']
   model_run = os.environ['MODEL_RUN']
   train_file = app_root + "/Data/cleveland_cntk_twonode.txt"
   model_file = app_root + "/Model/cleveland_bnn_" + model_run + ".model"
+  # *******************
   # Windows Version
   # TBD
   
@@ -95,9 +96,11 @@ def main():
   print("Classification accuracy on the %d data items = %0.2f%%" \
     % (num_test,acc))
 
+  # ******************* Updates from Original
   # Save Model
   model.save(model_file)
   print("\nSaved Cleveland Heart Disease Model to: " + model_file)
+  # *******************
 
   # (use trained model to make prediction)
 
